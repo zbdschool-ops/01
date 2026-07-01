@@ -748,6 +748,102 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 .s5-quest-inner-explanation-title { font-size: 13px; }
 .s5-quest-inner-explanation-text { font-size: 11px; line-height: 1.5; }
 }
+/* ===== АДАПТИВНІСТЬ (ДОДАТИ В КІНЕЦЬ СТИЛІВ) ===== */
+@media (max-width: 768px) {
+    /* Вирішує проблему з подвійним заголовком і місцем */
+    .header {
+        padding: 8px 12px;
+    }
+    .header-title {
+        font-size: 13px; /* Зменшуємо шрифт заголовка */
+    }
+    
+    /* Вирішує проблему з сіткою (картинка + текст) */
+    /* Шукаємо блоки, які мають grid 320px 1fr і робимо їх в одну колонку */
+    #page-3-1 .situation-card > div[style*="grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    /* Зображення на всю ширину */
+    #page-3-1 .situation-card > div[style*="grid"] > div:first-child {
+        order: -1;
+        max-width: 100%;
+    }
+    
+    #page-3-1 .situation-card > div[style*="grid"] > div:first-child img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Виправляємо формулу ризику */
+    .risk-formula {
+        flex-direction: column !important;
+        gap: 10px !important;
+        align-items: center !important;
+    }
+    
+    .formula-item {
+        width: 100% !important;
+        max-width: 260px !important;
+        padding: 15px 20px !important;
+    }
+    
+    .multiply-sign {
+        transform: rotate(90deg) !important;
+        margin: 5px 0 !important;
+        font-size: 28px !important;
+    }
+    
+    /* Виправляємо блок з визначенням */
+    .definition-box {
+        margin: 15px 0 !important;
+        padding: 15px !important;
+    }
+    
+    /* Виправляємо інформаційний блок */
+    #page-3-1 .situation-card > div[style*="grid"] > div:last-child > div[style*="background"] {
+        margin: 15px 0 !important;
+        padding: 15px !important;
+    }
+    
+    /* Заголовок "Твоє завдання" */
+    #page-3-1 .situation-card h3 {
+        margin: 20px 0 15px !important;
+    }
+}
+    
+    /* Виправляємо формулу ризику (Імовірність х Наслідки = Ризик) */
+    .risk-formula {
+        flex-direction: column; /* Ставимо елементи вертикально */
+        gap: 10px;
+        align-items: center;
+    }
+    .formula-item {
+        width: 100%;
+        max-width: 250px; /* Обмежуємо ширину карток */
+        padding: 15px;
+    }
+    .multiply-sign {
+        transform: rotate(90deg); /* Повертаємо знак множення, якщо треба */
+        margin: -5px 0;
+    }
+
+    /* Загальні покращення для мобільних */
+    .main-content {
+        padding-bottom: 80px; /* Щоб контент не перекривався нижньою панеллю браузера */
+    }
+    
+    /* Ховаємо зайві елементи навуігації кроків на малих екранах, щоб дати більше місця контенту */
+    .step-progress-dots {
+        display: none; 
+    }
+    
+    /* Зменшуємо розміри карток */
+    .practice-card, .s5-quest-btn, .s6-stat-card {
+        padding: 12px;
+    }
+}
 </style>
 </head>
 <body>
@@ -855,7 +951,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="activities-box">
 <h3>Що ти робитимеш?</h3>
 <div class="activity-item"><span class="activity-icon">👆</span><span>Натискати на інтерактивні елементи</span></div>
-<div class="activity-item"><span class="activity-icon">📋</span><span>Виконувати міні-завдання</span></div>
+<div class="activity-item"><span class="activity-icon">📋</span><span>Виконувати завдання</span></div>
 <div class="activity-item"><span class="activity-icon">⚖️</span><span>Порівнювати ризики</span></div>
 <div class="activity-item"><span class="activity-icon">💡</span><span>Аналізувати наслідки рішень</span></div>
 <div class="activity-item"><span class="activity-icon">⭐</span><span>Оцінювати власні вміння</span></div>
@@ -2039,34 +2135,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </div>
 <div class="situation-card">
 <div class="situation-header"><div class="situation-number red">👧</div><div class="situation-title">Аналіз ситуації Альбіни</div></div>
-<p style="margin-bottom: 15px;">Альбіна вийшла з дому без телефону. Телефон розрядився. Вона в незнайомому районі, уже темніє.</p>
+<p style="margin-bottom: 15px;">Після тренування Альбіна випадково поїхала не тим автобусом і опинилася в незнайомому районі. Телефон розрядився, а на вулиці вже починало темніти.</p>
+
 <div class="s5-scenario-container">
-<div class="s5-scenario-image">
-<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655864/alina-scenario_r157jd.png" alt="Альбіна">
-</div>
-<div style="display: flex; flex-direction: column; gap: 15px;">
-<p style="font-weight: 600; color: #1a1a6e;">Які дії може обрати Альбіна?</p>
-<div style="display: flex; flex-direction: column; gap: 10px;">
-<div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655880/walk_xdlsbq.png" alt="Іконка" style="width: 30px; height: 30px;">
-<span>Піти навмання шукати знайому вулицю</span>
-</div>
-<div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655872/crossing_ztkmk1.png" alt="Іконка" style="width: 30px; height: 30px;">
-<span>Звернутися до випадкового перехожого</span>
-</div>
-<div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655865/shop_hsl2gz.png" alt="Іконка" style="width: 30px; height: 30px;">
-<span>Зайти до магазину/аптеки</span>
-</div>
-<div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655873/bus_wsmuhl.png" alt="Іконка" style="width: 30px; height: 30px;">
-<span>Сісти в перший автобус</span>
-</div>
-</div>
-</div>
-</div>
-<h3 style="margin: 30px 0 15px; color: #1a1a6e;">Що обере Альбіна? Обери дію, щоб побачити наслідки:</h3>
+<!-- ЛІВА КОЛОНКА: заголовок + варіанти дій -->
+<div class="s5-scenario-text">
+<h3 style="margin: 0 0 15px; color: #1a1a6e; font-size: 20px;">Що обере Альбіна?</h3>
+<p style="font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px;">Обери дію, щоб побачити наслідки. Проаналізуй кожен варіант і зроби висновок, чи достатньо інформації для ухвалення рішення.</p>
+
 <div class="s5-outcome-cards">
 <div class="s5-outcome-card danger" onclick="s5ToggleOutcome(this)">
 <div class="s5-outcome-header">
@@ -2095,6 +2171,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="s5-outcome-verdict dangerous">Це рішення пов'язане з високим ризиком!</div>
 </div>
 </div>
+
 <div class="s5-outcome-card warning" onclick="s5ToggleOutcome(this)">
 <div class="s5-outcome-header">
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655872/crossing_ztkmk1.png" alt="Іконка">
@@ -2122,6 +2199,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="s5-outcome-verdict risky">Це рішення також пов'язане з ризиком</div>
 </div>
 </div>
+
 <div class="s5-outcome-card correct" onclick="s5ToggleOutcome(this)">
 <div class="s5-outcome-header">
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655865/shop_hsl2gz.png" alt="Іконка">
@@ -2149,6 +2227,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="s5-outcome-verdict safe">Це найбезпечніше рішення!</div>
 </div>
 </div>
+
 <div class="s5-outcome-card danger" onclick="s5ToggleOutcome(this)">
 <div class="s5-outcome-header">
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655873/bus_wsmuhl.png" alt="Іконка">
@@ -2178,6 +2257,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </div>
 </div>
 </div>
+
+<!-- ПРАВА КОЛОНКА: зображення -->
+<div class="s5-scenario-image">
+<img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782655864/alina-scenario_r157jd.png" alt="Альбіна">
+</div>
+</div>
+</div>
 <div class="nav-buttons">
 <button class="btn btn-secondary" onclick="showPage('page-5-4')">← Назад</button>
 <button class="btn btn-danger" onclick="showPage('page-5-6')">Далі: Знайди безпечніше рішення <span>→</span></button>
@@ -2191,7 +2277,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </div>
 <div class="situation-card">
 <div class="situation-header"><div class="situation-number red">🔗</div><div class="situation-title">Знайди безпечніше рішення</div></div>
-<p>З'єднай ситуацію (ліворуч) з найбезпечнішим рішенням (праворуч). Натискай по черзі на картку зліва, потім — справа.</p>
+<p>З'єднай ситуацію з найбезпечнішим рішенням. Натискай по черзі на картку з ситуацією, потім — з рішенням.</p>
 <div class="s5-matching-container">
 <div class="s5-matching-column" id="s5Situations">
 <div class="s5-column-label">📋 Ситуації</div>
@@ -2246,7 +2332,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </div>
 <div class="nav-buttons">
 <button class="btn btn-secondary" onclick="showPage('page-5-5')">← Назад</button>
-<button class="btn btn-danger" onclick="showPage('page-5-7')">Далі: Міні-квест <span>→</span></button>
+<button class="btn btn-danger" onclick="showPage('page-5-7')">Далі: Мініквест <span>→</span></button>
 </div>
 </div>
 </section>
@@ -2272,7 +2358,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="situation-card">
 <div class="situation-header">
 <div class="situation-number">🎯</div>
-<div class="situation-title">Міні-квест «Обери свій шлях»</div>
+<div class="situation-title">Мініквест «Обери свій шлях»</div>
 </div>
 <div class="s5-quest-scenario">
 <strong>Ситуація:</strong> Ти загубився в незнайомому районі. Обери свою дію та дізнайся наслідки.
