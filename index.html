@@ -971,10 +971,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <li><span class="task-checkbox" onclick="toggleCheckbox(this)"></span> проаналізуй життєві ситуації;</li>
 <li><span class="task-checkbox" onclick="toggleCheckbox(this)"></span> оціни власний простір.</li>
 </ul>
-<div class="progress-section">
-<h4>Прогрес</h4>
-<div class="progress-item"><span class="progress-radio" onclick="toggleRadio(this)"></span><span>Безпека</span></div>
-<div class="progress-item"><span class="progress-radio" onclick="toggleRadio(this)"></span><span>Безпечний простір</span></div>
 </div>
 <button class="btn" style="margin-top: 16px;" onclick="startSection()">Розпочати <span>→</span></button>
 </div>
@@ -1029,10 +1025,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322073/exit_door_wxjg3v.png" alt="Вихід захаращений" class="situation-image">
 <div class="question">Чи можна вважати цей простір безпечним?</div>
 <ul class="answer-options">
-<li><span class="answer-radio" onclick="selectRadio(this, '2-4', false, 'Наявність захарадженого виходу створює небезпеку в екстреній ситуації.')"></span><span>Так</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-4', false, 'Укриття є — це вже елемент безпеки, тому простір не можна назвати повністю небезпечним.')"></span><span>Ні</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-4', true, 'Наявність укриття — добре, але захараджений вихід може стати небезпекою у надзвичайній ситуації.')"></span><span>Частково</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-4', false)"></span><span>Так</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-4', false)"></span><span>Ні</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-4', true)"></span><span>Частково</span></li>
 </ul>
+<div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="btn btn-success" onclick="checkSituationAnswer('2-4')">✓ Перевірити відповідь</button>
+<button class="btn btn-secondary" onclick="resetSituationAnswer('2-4')">🔄 Спробувати ще раз</button>
+</div>
 <div class="explanation hidden" id="explanation-2-4"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text" id="explanation-text-2-4"></div></div>
 </div>
 <div class="nav-buttons">
@@ -1048,11 +1048,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322076/stressed_student_n7xvhb.png" alt="Стресований учень" class="situation-image">
 <div class="question">Що може допомогти покращити ситуацію? (Обери дві правильні відповіді.)</div>
 <ul class="answer-options">
-<li><span class="answer-checkbox" onclick="toggleCheckboxWithExplanation(this, true, 'explanation-25-1')"></span><div class="answer-text"><span>Однокласники можуть підтримати учня і заступитися за нього.</span><div class="inline-explanation hidden" id="explanation-25-1"><strong>✅ Правильно!</strong>Підтримка однокласників створює атмосферу довіри та безпеки.</div></div></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxWithExplanation(this, true, 'explanation-25-2')"></span><div class="answer-text"><span>Учитель може створити в класі атмосферу поваги.</span><div class="inline-explanation hidden" id="explanation-25-2"><strong>✅ Правильно!</strong>Учитель відіграє ключову роль у формуванні психологічного простору.</div></div></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxWithExplanation(this, false, 'explanation-25-3')"></span><div class="answer-text"><span>Сказати учневі, щоб він просто не звертав уваги.</span><div class="inline-explanation hidden" id="explanation-25-3"><strong>❌ Неправильно.</strong>Це не вирішує проблему.</div></div></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxWithExplanation(this, false, 'explanation-25-4')"></span><div class="answer-text"><span>Почати жартувати разом з іншими.</span><div class="inline-explanation hidden" id="explanation-25-4"><strong>❌ Неправильно.</strong>Це лише погіршить ситуацію.</div></div></li>
+<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><div class="answer-text"><span>Однокласники можуть підтримати учня і заступитися за нього.</span><div class="inline-explanation hidden" id="explanation-25-1"><strong>✅ Правильно!</strong> Підтримка однокласників створює атмосферу довіри та безпеки.</div></div></li>
+<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><div class="answer-text"><span>Учитель може створити в класі атмосферу поваги.</span><div class="inline-explanation hidden" id="explanation-25-2"><strong>✅ Правильно!</strong> Учитель відіграє ключову роль у формуванні психологічного простору.</div></div></li>
+<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><div class="answer-text"><span>Сказати учневі, щоб він просто не звертав уваги.</span><div class="inline-explanation hidden" id="explanation-25-3"><strong>❌ Неправильно.</strong> Це не вирішує проблему.</div></div></li>
+<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><div class="answer-text"><span>Почати жартувати разом з іншими.</span><div class="inline-explanation hidden" id="explanation-25-4"><strong>❌ Неправильно.</strong> Це лише погіршить ситуацію.</div></div></li>
 </ul>
+<div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="btn btn-success" onclick="checkSituationCheckboxes('2-5')">✓ Перевірити відповідь</button>
+<button class="btn btn-secondary" onclick="resetSituationCheckboxes('2-5')">🔄 Спробувати ще раз</button>
 </div>
 <div class="nav-buttons">
 <button class="btn btn-secondary" onclick="showPage('safe-space')">← Безпечний простір</button>
@@ -1067,11 +1070,15 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322076/girl_studying_c4v1ht.png" alt="Дівчина з книгами" class="situation-image">
 <div class="question">Що може допомогти покращити ситуацію?</div>
 <ul class="answer-options">
-<li><span class="answer-checkbox" onclick="toggleCheckboxAnswer(this, '2-6', true)"></span><span>Запросити його до спільної діяльності</span></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxAnswer(this, '2-6', false)"></span><span>Ігнорувати проблему</span></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxAnswer(this, '2-6', true)"></span><span>Виявити підтримку та заохочувати спілкування</span></li>
-<li><span class="answer-checkbox" onclick="toggleCheckboxAnswer(this, '2-6', false)"></span><span>Поширювати жарти про нього</span></li>
+<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><span>Запросити його до спільної діяльності</span></li>
+<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><span>Ігнорувати проблему</span></li>
+<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><span>Виявити підтримку та заохочувати спілкування</span></li>
+<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><span>Поширювати жарти про нього</span></li>
 </ul>
+<div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="btn btn-success" onclick="checkSituationCheckboxes('2-6')">✓ Перевірити відповідь</button>
+<button class="btn btn-secondary" onclick="resetSituationCheckboxes('2-6')">🔄 Спробувати ще раз</button>
+</div>
 <div class="explanation hidden" id="explanation-2-6"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text">Підтримка та включення допомагають створити дружнє та безпечне середовище.</div></div>
 </div>
 <div class="nav-buttons">
@@ -1087,12 +1094,15 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322073/phone_warning_y2mszz.png" alt="Телефон з попередженням" class="situation-image">
 <div class="question">Як краще діяти?</div>
 <ul class="answer-options">
-<li><span class="answer-radio" onclick="selectRadio(this, '2-7', false, 'Це може бути фішинг — шахрайське посилання.')"></span><span>Перейти за посиланням і ввести пароль</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-7', true, 'Це може бути спроба шахрайства. Не переходь за підозрілими посиланнями.')"></span><span>Проігнорувати повідомлення</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-7', false, 'Ніколи не надсилайте свій пароль.')"></span><span>Надіслати пароль від акаунта</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-7', false, 'Краще проігнорувати підозріле повідомлення.')"></span><span>Відповісти та уточнити інформацію</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-7', false)"></span><span>Перейти за посиланням і ввести пароль</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-7', true)"></span><span>Проігнорувати повідомлення</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-7', false)"></span><span>Надіслати пароль від акаунта</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-7', false)"></span><span>Відповісти та уточнити інформацію</span></li>
 </ul>
-<div class="explanation hidden" id="explanation-2-7"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text" id="explanation-text-2-7"></div></div>
+<div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="btn btn-success" onclick="checkSituationAnswer('2-7')">✓ Перевірити відповідь</button>
+<button class="btn btn-secondary" onclick="resetSituationAnswer('2-7')">🔄 Спробувати ще раз</button>
+</div><div class="explanation hidden" id="explanation-2-7"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text" id="explanation-text-2-7"></div></div>
 </div>
 <div class="nav-buttons">
 <button class="btn btn-secondary" onclick="showPage('safe-space')">← Безпечний простір</button>
@@ -1107,12 +1117,15 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322075/stressed_person_phone_ejbi3y.png" alt="Стрес" class="situation-image">
 <div class="question">Яка реакція буде найбільш конструктивною?</div>
 <ul class="answer-options">
-<li><span class="answer-radio" onclick="selectRadio(this, '2-8', false, 'Важливо не втрачати віру в себе.')"></span><span>Засмутитися і сказати, що в мене нічого не вийде</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-8', false, 'Відповідальність лежить на тобі.')"></span><span>Звинуватити вчителя або інших</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-8', true, 'Аналіз помилок допомагає розвиватися.')"></span><span>Проаналізувати помилки і спробувати ще раз</span></li>
-<li><span class="answer-radio" onclick="selectRadio(this, '2-8', false, 'Ігнорування проблеми не допоможе.')"></span><span>Ігнорувати проблему та нічого не робити</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-8', false)"></span><span>Засмутитися і сказати, що в мене нічого не вийде</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-8', false)"></span><span>Звинуватити вчителя або інших</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-8', true)"></span><span>Проаналізувати помилки і спробувати ще раз</span></li>
+<li><span class="answer-radio" onclick="selectRadioSimple(this, '2-8', false)"></span><span>Ігнорувати проблему та нічого не робити</span></li>
 </ul>
-<div class="explanation hidden" id="explanation-2-8"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text" id="explanation-text-2-8"></div></div>
+<div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="btn btn-success" onclick="checkSituationAnswer('2-8')">✓ Перевірити відповідь</button>
+<button class="btn btn-secondary" onclick="resetSituationAnswer('2-8')">🔄 Спробувати ще раз</button>
+</div><div class="explanation hidden" id="explanation-2-8"><div class="explanation-title">💡 Пояснення</div><div class="explanation-text" id="explanation-text-2-8"></div></div>
 </div>
 <div class="nav-buttons">
 <button class="btn btn-secondary" onclick="showPage('safe-space')">← Безпечний простір</button>
@@ -2702,7 +2715,7 @@ const stepTracker = {
 step1: { total: 2, completed: 0, tasks: { risks: false, decision: false } },
 step2: { total: 7, completed: 0, tasks: { sit24: false, sit25: false, sit26: false, sit27: false, sit28: false, matching: false, odd: false } },
 step3: { total: 3, completed: 0, tasks: { practice: false, checklist: false, dragdrop: false } },
-step4: { total: 6, completed: 0, tasks: { q3: false, q4: false, q5: false, q6: false, q7: false, q8: false, q10: false } },
+step4: { total: 7, completed: 0, tasks: { q3: false, q4: false, q5: false, q6: false, q7: false, q8: false, q10: false } },
 step5: { total: 5, completed: 0, tasks: { quiz53: false, order: false, alina: false, match: false, checklist: false } }
 };
 const stepsCompleted = { 1: false, 2: false, 3: false, 4: false, 5: false };
@@ -2722,6 +2735,164 @@ social: { icon: '👥', title: 'Соціальний простір', nextSituat
 digital: { icon: '🔒', title: 'Цифровий простір', nextSituation: 'situation-2-7', content: '<h3>Що таке цифровий простір?</h3><p>Захист даних, приватність, безпечна поведінка онлайн.</p><h4>Характеристики:</h4><ul><li>Захист персональних даних</li><li>Приватність акаунтів</li><li>Безпечна поведінка в інтернеті</li></ul>' },
 internal: { icon: '🧘', title: 'Внутрішній простір', nextSituation: 'situation-2-8', content: '<h3>Що таке внутрішній простір?</h3><p>Самоповага, розуміння себе, керування емоціями.</p><h4>Характеристики:</h4><ul><li>Самоповага та самоцінність</li><li>Розуміння своїх емоцій</li><li>Керування стресом</li></ul>' }
 };
+/* ===================================================================
+🆕 НОВІ ФУНКЦІЇ ДЛЯ ПЕРЕВІРКИ ВІДПОВІДЕЙ У СИТУАЦІЯХ 2-4...2-8
+=================================================================== */
+
+// Простий вибір радіо-кнопки БЕЗ автоматичної перевірки
+function selectRadioSimple(element, situationId, isCorrect) {
+    const parent = element.closest('.answer-options');
+    parent.querySelectorAll('.answer-radio').forEach(r => r.classList.remove('checked', 'incorrect', 'correct'));
+    element.classList.add('checked');
+    element.dataset.correct = isCorrect;
+    
+    // Ховаємо попереднє пояснення, якщо воно було показано
+    const explanation = document.getElementById('explanation-' + situationId);
+    if (explanation) explanation.classList.add('hidden');
+}
+
+// Перевірка відповіді для радіо-кнопок (2-4, 2-7, 2-8)
+function checkSituationAnswer(situationId) {
+    const page = document.getElementById('page-situation-' + situationId);
+    const selected = page.querySelector('.answer-radio.checked');
+    const explanation = document.getElementById('explanation-' + situationId);
+    const explanationText = document.getElementById('explanation-text-' + situationId);
+    
+    if (!selected) {
+        alert('⚠️ Будь ласка, спочатку оберіть відповідь!');
+        return;
+    }
+    
+    const isCorrect = selected.dataset.correct === 'true';
+    
+    // Записуємо результат у трекер прогресу
+    if (!progressTracker.answered.has('sit_' + situationId)) {
+        if (isCorrect) addCorrect('sit_' + situationId);
+        else addWrong('sit_' + situationId);
+    }
+    
+    // Тексти пояснень для кожного завдання
+    const explanations = {
+        '2-4': 'Наявність укриття — добре, але захараджений вихід може стати небезпекою у надзвичайній ситуації. Тому простір можна вважати безпечним лише частково.',
+        '2-7': 'Це може бути спроба фішингу — шахрайського посилання. Не переходь за підозрілими посиланнями і ніколи не надсилай свій пароль.',
+        '2-8': 'Аналіз помилок допомагає розвиватися. Важливо не втрачати віру в себе і спробувати ще раз, врахувавши попередні помилки.'
+    };
+    
+    // Показуємо пояснення
+    if (explanation) {
+        explanation.classList.remove('hidden', 'correct-answer', 'incorrect-answer');
+        if (isCorrect) {
+            explanation.classList.add('correct-answer');
+            selected.classList.add('correct');
+            if (explanationText) explanationText.textContent = explanations[situationId];
+        } else {
+            explanation.classList.add('incorrect-answer');
+            selected.classList.add('incorrect');
+            if (explanationText) explanationText.textContent = explanations[situationId];
+        }
+        // Прокручуємо до пояснення
+        setTimeout(() => {
+            explanation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
+
+// Скидання відповіді для радіо-кнопок
+function resetSituationAnswer(situationId) {
+    const page = document.getElementById('page-situation-' + situationId);
+    page.querySelectorAll('.answer-radio').forEach(r => {
+        r.classList.remove('checked', 'incorrect', 'correct');
+        delete r.dataset.correct;
+    });
+    const explanation = document.getElementById('explanation-' + situationId);
+    if (explanation) explanation.classList.add('hidden');
+}
+
+// Простий toggle чекбокса БЕЗ автоматичної перевірки
+function toggleCheckboxSimple(element) {
+    element.classList.toggle('checked');
+}
+
+// Перевірка відповідей для чекбоксів (2-5, 2-6)
+function checkSituationCheckboxes(situationId) {
+    const page = document.getElementById('page-situation-' + situationId);
+    const checkboxes = page.querySelectorAll('.answer-checkbox');
+    
+    let allCorrect = true;
+    let hasSelection = false;
+    let correctCount = 0;
+    let totalCorrect = 0;
+    
+    checkboxes.forEach((cb) => {
+        const shouldBeChecked = cb.dataset.correct === 'true';
+        if (shouldBeChecked) totalCorrect++;
+        
+        const isChecked = cb.classList.contains('checked');
+        
+        // Знаходимо inline-explanation, якщо є
+        const parentText = cb.closest('li') ? cb.closest('li').querySelector('.inline-explanation') : null;
+        
+        if (isChecked) {
+            hasSelection = true;
+            cb.classList.remove('correct', 'incorrect');
+            
+            if (shouldBeChecked) {
+                cb.classList.add('correct');
+                correctCount++;
+                if (parentText) {
+                    parentText.classList.remove('hidden', 'incorrect');
+                    parentText.classList.add('correct');
+                }
+            } else {
+                cb.classList.add('incorrect');
+                allCorrect = false;
+                if (parentText) {
+                    parentText.classList.remove('hidden', 'correct');
+                    parentText.classList.add('incorrect');
+                }
+            }
+        } else {
+            cb.classList.remove('correct', 'incorrect');
+            if (shouldBeChecked) allCorrect = false;
+            if (parentText) parentText.classList.add('hidden');
+        }
+    });
+    
+    if (!hasSelection) {
+        alert('⚠️ Будь ласка, спочатку оберіть хоча б одну відповідь!');
+        return;
+    }
+    
+    // Записуємо результат у трекер прогресу
+    if (!progressTracker.answered.has('sit_' + situationId)) {
+        if (allCorrect && correctCount === totalCorrect) addCorrect('sit_' + situationId);
+        else addWrong('sit_' + situationId);
+    }
+    
+    // Показуємо загальне пояснення (якщо є)
+    const explanation = document.getElementById('explanation-' + situationId);
+    if (explanation) {
+        explanation.classList.remove('hidden', 'correct-answer', 'incorrect-answer');
+        if (allCorrect && correctCount === totalCorrect) {
+            explanation.classList.add('correct-answer');
+        } else {
+            explanation.classList.add('incorrect-answer');
+        }
+    }
+}
+
+// Скидання відповідей для чекбоксів
+function resetSituationCheckboxes(situationId) {
+    const page = document.getElementById('page-situation-' + situationId);
+    page.querySelectorAll('.answer-checkbox').forEach(cb => {
+        cb.classList.remove('checked', 'correct', 'incorrect');
+    });
+    // Ховаємо всі inline-explanation
+    page.querySelectorAll('.inline-explanation').forEach(exp => exp.classList.add('hidden'));
+    // Ховаємо загальне пояснення
+    const explanation = document.getElementById('explanation-' + situationId);
+    if (explanation) explanation.classList.add('hidden');
+}
 const correctMatching = {
 'ukryttia': 'physical', 'vilni-vyhody': 'physical',
 'dovira': 'psychological', 'bez-nasmishok': 'psychological',
@@ -2756,8 +2927,8 @@ const s4DragData6 = [
 ];
 const s4DragData8 = [
 { order: 1, text: 'Натовп', icon: '👥' },
-{ order: 2, text: 'Відеозйомка', icon: '📹' },
-{ order: 3, text: 'Штовхання', icon: '😤' },
+{ order: 2, text: 'Штовхання', icon: '😤' },
+{ order: 3, text: 'Відеозйомка', icon: '📹' },
 { order: 4, text: 'Поширення відео', icon: '📱' },
 { order: 5, text: 'Приниження учня', icon: '😢' }
 ];
@@ -2834,7 +3005,7 @@ showToast(`✅ Крок ${stepNum} завершено!`, '🎉');
 updateStep6Display();
 }
 function updateLiveProgress() {
-const totalTasks = 23;
+const totalTasks = 24;
 let completedTasks = 0;
 for (let i = 1; i <= 5; i++) {
 completedTasks += stepTracker['step' + i].completed;
@@ -2897,7 +3068,7 @@ card.classList.remove('completed', 'current');
 if (stepsCompleted[i]) card.classList.add('completed');
 }
 }
-const totalTasks = 23;
+const totalTasks = 24;
 let completedTasks = 0;
 for (let i = 1; i <= 5; i++) {
 completedTasks += stepTracker['step' + i].completed;
