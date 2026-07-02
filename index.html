@@ -748,35 +748,35 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 .s5-quest-inner-explanation-title { font-size: 13px; }
 .s5-quest-inner-explanation-text { font-size: 11px; line-height: 1.5; }
 }
-/* ===== АДАПТИВНІСТЬ (ДОДАТИ В КІНЕЦЬ СТИЛІВ) ===== */
+/* ===== АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ===== */
 @media (max-width: 768px) {
-    /* Вирішує проблему з подвійним заголовком і місцем */
+    /* Header */
     .header {
         padding: 8px 12px;
     }
     .header-title {
-        font-size: 13px; /* Зменшуємо шрифт заголовка */
+        font-size: 13px;
     }
     
-    /* Вирішує проблему з сіткою (картинка + текст) */
-    /* Шукаємо блоки, які мають grid 320px 1fr і робимо їх в одну колонку */
-    #page-3-1 .situation-card > div[style*="grid"] {
-        grid-template-columns: 1fr !important;
+    /* ✅ ГОЛОВНЕ ВИПРАВЛЕННЯ: Сітка зображення + текст на сторінці 3-1 */
+    #page-3-1 .situation-card > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
         gap: 20px !important;
     }
     
     /* Зображення на всю ширину */
-    #page-3-1 .situation-card > div[style*="grid"] > div:first-child {
-        order: -1;
-        max-width: 100%;
+    #page-3-1 .situation-card > div[style*="grid-template-columns"] > div:first-child {
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
-    #page-3-1 .situation-card > div[style*="grid"] > div:first-child img {
-        max-width: 100%;
-        height: auto;
+    #page-3-1 .situation-card > div[style*="grid-template-columns"] > div:first-child img {
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
-    /* Виправляємо формулу ризику */
+    /* Формула ризику - вертикальне розташування */
     .risk-formula {
         flex-direction: column !important;
         gap: 10px !important;
@@ -795,54 +795,81 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
         font-size: 28px !important;
     }
     
-    /* Виправляємо блок з визначенням */
-    .definition-box {
+    /* Інформаційні блоки */
+    .definition-box,
+    #page-3-1 .situation-card > div[style*="background"] {
         margin: 15px 0 !important;
         padding: 15px !important;
-    }
-    
-    /* Виправляємо інформаційний блок */
-    #page-3-1 .situation-card > div[style*="grid"] > div:last-child > div[style*="background"] {
-        margin: 15px 0 !important;
-        padding: 15px !important;
+        font-size: 14px !important;
     }
     
     /* Заголовок "Твоє завдання" */
     #page-3-1 .situation-card h3 {
         margin: 20px 0 15px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Список завдань */
+    .tasks-list-step3 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .task-item-step3 {
+        width: 100% !important;
+    }
+    
+    /* Навігаційні кнопки */
+    .nav-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .nav-buttons .btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    /* Загальні покращення */
+    .main-content {
+        padding: 10px !important;
+        padding-bottom: 80px !important;
+    }
+    
+    .situation-card {
+        padding: 15px !important;
+    }
+    
+    /* Ховаємо індикатори кроків на малих екранах */
+    .step-progress-dots {
+        display: none !important;
     }
 }
-    
-    /* Виправляємо формулу ризику (Імовірність х Наслідки = Ризик) */
-    .risk-formula {
-        flex-direction: column; /* Ставимо елементи вертикально */
-        gap: 10px;
-        align-items: center;
-    }
-    .formula-item {
-        width: 100%;
-        max-width: 250px; /* Обмежуємо ширину карток */
-        padding: 15px;
-    }
-    .multiply-sign {
-        transform: rotate(90deg); /* Повертаємо знак множення, якщо треба */
-        margin: -5px 0;
-    }
 
-    /* Загальні покращення для мобільних */
-    .main-content {
-        padding-bottom: 80px; /* Щоб контент не перекривався нижньою панеллю браузера */
+/* Для дуже малих екранів */
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 20px !important;
     }
     
-    /* Ховаємо зайві елементи навуігації кроків на малих екранах, щоб дати більше місця контенту */
-    .step-progress-dots {
-        display: none; 
+    .formula-item {
+        padding: 12px 15px !important;
+        min-width: auto !important;
     }
     
-    /* Зменшуємо розміри карток */
-    .practice-card, .s5-quest-btn, .s6-stat-card {
-        padding: 12px;
+    .formula-icon {
+        font-size: 28px !important;
     }
+    
+    .multiply-sign {
+        font-size: 24px !important;
+    }
+    
+    .definition-box strong {
+        font-size: 14px !important;
+    } 
 }
 </style>
 </head>
@@ -1162,14 +1189,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="situation-card">
 <div class="situation-header"><div class="situation-number">👥</div><div class="situation-title">Соціальний простір</div></div>
 <h4 style="margin-bottom: 10px; font-size: 14px;">Ситуація</h4>
-<p>Новачка не беруть до командних проєктів.</p>
+<p>Нову ученицю не беруть до командних проєктів.</p>
 <img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782322076/girl_studying_c4v1ht.png" alt="Дівчина з книгами" class="situation-image">
 <div class="question">Що може допомогти покращити ситуацію?</div>
 <ul class="answer-options">
-<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><span>Запросити його до спільної діяльності</span></li>
+<li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><span>Запросити її до спільної діяльності</span></li>
 <li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><span>Ігнорувати проблему</span></li>
 <li><span class="answer-checkbox" data-correct="true" onclick="toggleCheckboxSimple(this)"></span><span>Виявити підтримку та заохочувати спілкування</span></li>
-<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><span>Поширювати жарти про нього</span></li>
+<li><span class="answer-checkbox" data-correct="false" onclick="toggleCheckboxSimple(this)"></span><span>Поширювати жарти про неї</span></li>
 </ul>
 <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
 <button class="btn btn-success" onclick="checkSituationCheckboxes('2-6')">✓ Перевірити відповідь</button>
@@ -1240,7 +1267,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="matching-item" data-item="pidtrymka" onclick="selectMatchingItem(this)">👥 Підтримка друзів</div>
 <div class="matching-item" data-item="parol" onclick="selectMatchingItem(this)">🔒 Надійний пароль</div>
 <div class="matching-item" data-item="samopova" onclick="selectMatchingItem(this)">🧘 Самоповага</div>
-<div class="matching-item" data-item="vilni-vyhody" onclick="selectMatchingItem(this)">🚪 Вільні виходи</div>
+<div class="matching-item" data-item="vilni-vyhody" onclick="selectMatchingItem(this)">🚪Незахаращені евакуаційні виходи</div>
 <div class="matching-item" data-item="dovira" onclick="selectMatchingItem(this)">🤝 Довіра до вчителя</div>
 <div class="matching-item" data-item="perevirka-dzherel" onclick="selectMatchingItem(this)">🔍 Перевірка джерел інформації</div>
 <div class="matching-item" data-item="bez-nasmishok" onclick="selectMatchingItem(this)">😊 Можливість помилитися без насмішок</div>
@@ -1527,9 +1554,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="checklist-name"><img src="https://res.cloudinary.com/dmydvhkzr/image/upload/v1782498756/scooter_rain_rx6oze.png" alt="Максим">🛴 Максим</div>
 <div class="checklist-options">
 <label class="checklist-option" data-correct="true"><input type="checkbox" name="m1" value="correct"> Одягнути шолом</label>
-<label class="checklist-option" data-correct="true"><input type="checkbox" name="m2" value="correct"> Знизити швидкість</label>
-<label class="checklist-option" data-correct="true"><input type="checkbox" name="m3" value="correct"> Не поспішати</label>
+<label class="checklist-option" data-correct="true"><input type="checkbox" name="m2" value="correct"> Міцно тримати кермо</label>
 <label class="checklist-option" data-correct="false"><input type="checkbox" name="m4" value="wrong"> Їхати тротуаром</label>
+<label class="checklist-option" data-correct="true"><input type="checkbox" name="m3" value="correct"> Уникати різких маневрів </label>
 </div>
 </div>
 <div class="checklist-item">
@@ -1678,7 +1705,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="s4-card-new-hint">👆 Натисни, щоб дізнатися</div>
 <div class="s4-card-new-explanation">
 <strong>💬 Поступовий розвиток</strong>
-Ситуація розвивається повільно, крок за кроком. Важливо зупинити її на ранньому етапі. Наприклад, образа → приниження → ізоляція → травма.
+Ситуація розвивається повільно, крок за кроком. Важливо зупинити її на ранньому етапі. Наприклад, образа → приниження → ізоляція → психологічна травма.
 </div>
 </div>
 <div class="s4-card-new" onclick="s4ToggleCardInfo(this)">
@@ -1758,9 +1785,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <p style="margin: 20px 0;"><strong>Завдання:</strong> Який етап потрібно зупинити найраніше?</p>
 <div class="s4-slider-container">
 <input type="range" min="1" max="4" value="1" class="s4-slider" id="s4Slider4">
-<div class="s4-slider-labels"><span>Жарти</span><span>Приниження</span><span>Ізоляція</span><span>Травма</span></div>
+<div class="s4-slider-labels"><span>Приниження</span><span>Ізоляція</span><span>Жарти</span><span>Травма</span></div>
 </div>
-<button class="s4-btn s4-btn-success" onclick="s4CheckSlider(4, 1)">✓ Перевірити</button>
+<button class="s4-btn s4-btn-success" onclick="s4CheckSlider(4, 3)">✓ Перевірити</button>
 <button class="s4-btn s4-btn-warning" onclick="s4ResetSlider(4)">🔄 Зробити заново</button>
 <div id="s4Feedback4" class="s4-feedback"></div>
 </div>
@@ -1787,10 +1814,11 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <div class="s4-checkbox-group">
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="injury"><span>Травма</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="delay"><span>Затримка руху</span></label>
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="damage"><span>Матеріальні збитки</span></label>
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="serious"><span>Серйозні наслідки</span></label>
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="accident"><span>ДТП</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="damage"><span>Збитки, завдані транспортному засобу</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="serious"><span>Пошкодження дорожніх споруд</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="nothing"><span>Нічого не станеться</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q5" value="accident"><span>ДТП</span></label>
+</label>
 </div>
 <button class="s4-btn s4-btn-success" onclick="s4CheckCheckboxes(5, ['injury', 'delay', 'damage', 'serious', 'accident'])">✓ Перевірити</button>
 <button class="s4-btn s4-btn-warning" onclick="s4ResetCheckboxes(5)">🔄 Зробити заново</button>
@@ -1891,23 +1919,23 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <p style="margin: 20px 0;"><strong>Завдання:</strong> Оберіть твердження, які характерні для цього типу розвитку.</p>
 <div class="s4-info-box"><strong>Керована ситуація:</strong></div>
 <div class="s4-checkbox-group">
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_1" value="control"><span>Є можливість контролювати події</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q10_1" value="sudden"><span>Усе відбувається раптово</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_1" value="control"><span>Є можливість контролювати події</span></label>
 </div>
 <div class="s4-info-box"><strong>Поступова ситуація:</strong></div>
 <div class="s4-checkbox-group">
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_2" value="gradual"><span>Розвивається поступово, крок за кроком</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q10_2" value="immediate"><span>Наслідки видно одразу</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_2" value="gradual"><span>Розвивається поступово, крок за кроком</span></label>
 </div>
 <div class="s4-info-box"><strong>Раптова ситуація:</strong></div>
 <div class="s4-checkbox-group">
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_3" value="unexpected"><span>Виникає несподівано</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q10_3" value="preventable"><span>Можна передбачити кожен крок</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_3" value="unexpected"><span>Виникає несподівано</span></label>
 </div>
 <div class="s4-info-box"><strong>Ланцюгова ситуація:</strong></div>
 <div class="s4-checkbox-group">
-<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_4" value="chain"><span>Одна подія спричиняє інші</span></label>
 <label class="s4-checkbox-item"><input type="checkbox" name="s4q10_4" value="independent"><span>Не має зв'язку між подіями</span></label>
+<label class="s4-checkbox-item"><input type="checkbox" name="s4q10_4" value="chain"><span>Одна подія спричиняє інші</span></label>
 </div>
 <button class="s4-btn s4-btn-success" onclick="s4CheckSelfTest(10)">✓ Перевірити</button>
 <button class="s4-btn s4-btn-warning" onclick="s4ResetSelfTest(10)">🔄 Зробити заново</button>
@@ -2157,7 +2185,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <li class="warning">Ніхто не знатиме, де ти перебуваєш</li>
 </ul>
 <div class="s5-yes-no-question">
-<strong>Чи достатньо інформації для такого рішення?</strong>
+<strong>Чи  вистачає інформації для обґрунтованого рішення?</strong>
 <div class="s5-yes-no-options">
 <label id="s5q571-yes"><input type="radio" name="s5q571" value="так"> Так</label>
 <label id="s5q571-no"><input type="radio" name="s5q571" value="ні"> Ні</label>
@@ -2185,7 +2213,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <li class="correct">Як факт, ця людина справді зможе допомогти</li>
 </ul>
 <div class="s5-yes-no-question">
-<strong>Чи достатньо інформації для такого рішення?</strong>
+<strong>Чи  вистачає інформації для обґрунтованого рішення?</strong>
 <div class="s5-yes-no-options">
 <label id="s5q572-yes"><input type="radio" name="s5q572" value="так"> Так</label>
 <label id="s5q572-no"><input type="radio" name="s5q572" value="ні"> Ні</label>
@@ -2213,7 +2241,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <li class="correct">Ти в безпечному та освітленому місці</li>
 </ul>
 <div class="s5-yes-no-question">
-<strong>Чи достатньо інформації для такого рішення?</strong>
+<strong>Чи  вистачає інформації для обґрунтованого рішення?</strong>
 <div class="s5-yes-no-options">
 <label id="s5q573-yes"><input type="radio" name="s5q573" value="так"> Так</label>
 <label id="s5q573-no"><input type="radio" name="s5q573" value="ні"> Ні</label>
@@ -2241,7 +2269,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 <li class="warning">Стане темніше, і знайти допомогу буде складніше</li>
 </ul>
 <div class="s5-yes-no-question">
-<strong>Чи достатньо інформації для такого рішення?</strong>
+<strong>Чи  вистачає інформації для обґрунтованого рішення?</strong>
 <div class="s5-yes-no-options">
 <label id="s5q574-yes"><input type="radio" name="s5q574" value="так"> Так</label>
 <label id="s5q574-no"><input type="radio" name="s5q574" value="ні"> Ні</label>
@@ -2815,7 +2843,7 @@ net: { number: 6, title: 'Будівельна сітка', image: 'https://res.
 building: { number: 7, title: 'Недобудова', image: 'https://res.cloudinary.com/dmydvhkzr/image/upload/v1781886121/unfinished_building_ymotls.png', riskType: 'Небезпечний об\'єкт', description: 'Конструкція не призначена для відпочинку чи прогулянок.', whatCanHappen: ['падіння', 'обвал конструкцій', 'травмування'], type: 'whatCanHappen' }
 };
 const spaceDetails = {
-physical: { icon: '🌳', title: 'Фізичний простір', nextSituation: 'situation-2-4', content: '<h3>Що таке фізичний простір?</h3><p>Фізичний простір — це безпечне місце, де немає фізичних загроз.</p><h4>Характеристики:</h4><ul><li>Відсутність фізичних загроз</li><li>Наявність укриття у разі небезпеки</li><li>Вільні виходи та евакуаційні шляхи</li></ul>' },
+physical: { icon: '🌳', title: 'Фізичний простір', nextSituation: 'situation-2-4', content: '<h3>Що таке фізичний простір?</h3><p>Фізичний простір — це безпечне місце, де немає фізичних загроз.</p><h4>Характеристики:</h4><ul><li>Відсутність фізичних загроз</li><li>Наявність укриття у разі небезпеки</li><li>Вільні виходи з будівлі та евакуаційні шляхи</li></ul>' },
 psychological: { icon: '🧠', title: 'Психологічний простір', nextSituation: 'situation-2-5', content: '<h3>Що таке психологічний простір?</h3><p>Атмосфера довіри та підтримки, відсутність страху.</p><h4>Характеристики:</h4><ul><li>Відсутність страху та тривоги</li><li>Атмосфера довіри</li><li>Підтримка та розуміння</li></ul>' },
 social: { icon: '👥', title: 'Соціальний простір', nextSituation: 'situation-2-6', content: '<h3>Що таке соціальний простір?</h3><p>Підтримка, співпраця, відсутність дискримінації.</p><h4>Характеристики:</h4><ul><li>Взаємопідтримка</li><li>Співпраця та командна робота</li><li>Відсутність дискримінації</li></ul>' },
 digital: { icon: '🔒', title: 'Цифровий простір', nextSituation: 'situation-2-7', content: '<h3>Що таке цифровий простір?</h3><p>Захист даних, приватність, безпечна поведінка онлайн.</p><h4>Характеристики:</h4><ul><li>Захист персональних даних</li><li>Приватність акаунтів</li><li>Безпечна поведінка в інтернеті</li></ul>' },
@@ -3007,16 +3035,15 @@ const matrixData = {
 /* 🆕 Дані для ланцюгових завдань (Крок 4) */
 const s4DragData6 = [
 { order: 1, text: 'Фейкове повідомлення про закриття продуктових магазинів', icon: '📱' },
-{ order: 2, text: 'Паніка', icon: '😰' },
-{ order: 3, text: 'Масові закупівлі', icon: '🛒' },
-{ order: 4, text: 'Порожні полиці', icon: '📦' },
+{ order: 2, text: 'Паніка серед населення', icon: '😰' },
+{ order: 3, text: 'Масові закупівлі продуктів', icon: '🛒' },
+{ order: 4, text: 'Порожні полиці в продуктових магазинах', icon: '📦' },
 ];
 const s4DragData8 = [
-{ order: 1, text: 'Натовп', icon: '👥' },
-{ order: 2, text: 'Штовхання', icon: '😤' },
-{ order: 3, text: 'Відеозйомка', icon: '📹' },
-{ order: 4, text: 'Поширення відео', icon: '📱' },
-{ order: 5, text: 'Приниження учня', icon: '😢' }
+{ order: 1, text: 'Навколо збирається натовп та виникає штовханина', icon: '👥' },
+{ order: 2, text: 'Очевидці знімають відео, як принижують учня', icon: '📹😢' },
+{ order: 3, text: 'Відео поширюють у мережі', icon: '📱' },
+{ order: 4, text: 'Приниження стає публічним', icon: '😤' }
 ];
 /* ===== СТАН ДОДАТКУ ===== */
 const state = {
@@ -4048,10 +4075,153 @@ resultDiv.className = 's5-result-message';
 resultDiv.style.display = 'none';
 }
 function s5InitDrag() {
-document.querySelectorAll('#s5DragItems .s5-draggable').forEach(item => {
-item.addEventListener('dragstart', s5DragStart);
-item.addEventListener('dragend', function() { this.classList.remove('dragging'); });
-});
+    const items = document.querySelectorAll('#s5DragItems .s5-draggable');
+    items.forEach(item => {
+        // Desktop drag
+        item.addEventListener('dragstart', s5DragStart);
+        item.addEventListener('dragend', function() { 
+            this.classList.remove('dragging'); 
+        });
+        
+        // ✅ Mobile touch support
+        s5InitTouchDrag(item);
+    });
+}
+function s5InitTouchDrag(dragItem) {
+    let touchClone = null;
+    let startX, startY, initialLeft, initialTop;
+    let originalElement = null;
+    
+    dragItem.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        
+        // Зберігаємо початкові координати
+        startX = touch.clientX;
+        startY = touch.clientY;
+        
+        const rect = this.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+        
+        // Створюємо клон для перетягування
+        touchClone = this.cloneNode(true);
+        touchClone.classList.add('touch-dragging');
+        touchClone.style.width = rect.width + 'px';
+        touchClone.style.left = initialLeft + 'px';
+        touchClone.style.top = initialTop + 'px';
+        touchClone.style.position = 'fixed';
+        touchClone.style.zIndex = '1000';
+        touchClone.style.pointerEvents = 'none';
+        touchClone.style.opacity = '0.8';
+        
+        document.body.appendChild(touchClone);
+        this.style.opacity = '0.3';
+        originalElement = this;
+        
+        // Підсвічуємо drop zones
+        document.querySelectorAll('.s5-drop-zone').forEach(zone => {
+            zone.style.background = '#fee2e2';
+            zone.style.borderColor = '#dc2626';
+        });
+    }, {passive: false});
+    
+    dragItem.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        if (!touchClone) return;
+        
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+        
+        touchClone.style.left = (initialLeft + deltaX) + 'px';
+        touchClone.style.top = (initialTop + deltaY) + 'px';
+        
+        // Перевіряємо, чи над drop zone
+        const touchX = touch.clientX;
+        const touchY = touch.clientY;
+        
+        document.querySelectorAll('.s5-drop-zone').forEach(zone => {
+            const rect = zone.getBoundingClientRect();
+            if (touchX >= rect.left && touchX <= rect.right &&
+                touchY >= rect.top && touchY <= rect.bottom) {
+                zone.style.background = '#dcfce7';
+                zone.style.borderColor = '#16a34a';
+                zone.style.transform = 'scale(1.05)';
+            } else {
+                zone.style.background = '#f9fafb';
+                zone.style.borderColor = '#d1d5db';
+                zone.style.transform = 'scale(1)';
+            }
+        });
+    }, {passive: false});
+    
+    dragItem.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        if (!touchClone || !originalElement) {
+            if (touchClone) touchClone.remove();
+            touchClone = null;
+            originalElement = null;
+            return;
+        }
+        
+        const touch = e.changedTouches[0];
+        const touchX = touch.clientX;
+        const touchY = touch.clientY;
+        
+        let dropped = false;
+        
+        // Перевіряємо всі drop zones
+        document.querySelectorAll('.s5-drop-zone').forEach(zone => {
+            if (dropped) return;
+            
+            const rect = zone.getBoundingClientRect();
+            if (touchX >= rect.left && touchX <= rect.right &&
+                touchY >= rect.top && touchY <= rect.bottom) {
+                
+                // Якщо зона вже заповнена - повертаємо старий елемент
+                const existingItem = zone.querySelector('.s5-draggable');
+                if (existingItem) {
+                    const itemsContainer = document.getElementById('s5DragItems');
+                    itemsContainer.appendChild(existingItem);
+                    existingItem.style.opacity = '1';
+                }
+                
+                // Переміщуємо елемент у зону
+                zone.innerHTML = '';
+                zone.classList.add('filled');
+                zone.style.background = '#dcfce7';
+                zone.style.borderColor = '#16a34a';
+                zone.appendChild(originalElement);
+                originalElement.style.opacity = '1';
+                
+                dropped = true;
+            }
+        });
+        
+        // Якщо не кинули в жодну зону - повертаємо назад
+        if (!dropped && originalElement.parentElement.id !== 's5DragItems') {
+            const itemsContainer = document.getElementById('s5DragItems');
+            itemsContainer.appendChild(originalElement);
+            originalElement.style.opacity = '1';
+        }
+        
+        // Очищаємо
+        if (touchClone) {
+            touchClone.remove();
+            touchClone = null;
+        }
+        originalElement = null;
+        
+        // Скидаємо стилі drop zones
+        document.querySelectorAll('.s5-drop-zone').forEach(zone => {
+            if (!zone.classList.contains('filled')) {
+                zone.style.background = '#f9fafb';
+                zone.style.borderColor = '#d1d5db';
+                zone.style.transform = 'scale(1)';
+            }
+        });
+    }, {passive: false});
 }
 function s5AllowDrop(ev) { ev.preventDefault(); }
 function s5DragEnter(ev) {
